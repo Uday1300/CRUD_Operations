@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt
 import sqlite3
 conn = sqlite3.connect('data.db')
 c = conn.cursor()
@@ -163,30 +162,7 @@ def main():
 			st.warning("Deleted: '{}'".format(delete_blog_by_title))
 
 
-		if st.checkbox("Metrics"):
-			
-			new_df['Length'] = new_df['Articles'].str.len()
-			st.dataframe(new_df)
-
-
-			st.subheader("Author Stats")
-			new_df["Author"].value_counts().plot(kind='bar')
-			st.pyplot()
-
-			st.subheader("Author Stats")
-			new_df['Author'].value_counts().plot.pie(autopct="%1.1f%%")
-           
-			st.pyplot()
-
-	
-
-		if st.checkbox("BarH Plot"):
-			st.subheader("Length of Articles")
-			new_df = clean_db
-			new_df['Length'] = new_df['Articles'].str.len()
-			barh_plot = new_df.plot.barh(x='Author',y='Length',figsize=(20,10))
-			st.pyplot()
-
+		
 
 if __name__ == '__main__':
 	main()
